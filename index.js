@@ -79,20 +79,18 @@ bot.command("help", async (ctx) => {
 
 // Helper Functions for New Commands
 async function sendProducts(ctx) {
-  const text = `🛍️ **Listahan ng mga Produkto (Products Catalog):**\n\n1. 📱 **Smartphone Pro Max** - ₱24,999\n   • 128GB Storage, 5G Ready\n\n2. 💻 **Laptop Ultra Slim** - ₱45,000\n   • Core i7, 16GB RAM, 512GB SSD\n\n3. 🎧 **Wireless Earbuds** - ₱1,999\n   • Active Noise Cancellation, 24hr Battery\n\n4. ⌚ **Smart Watch Series 5** - ₱3,499\n   • Heart Rate Monitor, Water Resistant\n\n💡 *Pumili ng item sa ibaba para sa detalye:*`;
+  const text = `🛍️ **Listahan ng mga Produkto (Products Catalog):**\n\n1. 🎬 **Netflix Premium** - ₱149 / month\n   • 4K Ultra HD + HDR\n   • 1 Screen Shared / Solo Profile\n   • Downloadable & Full Warranty\n\n2. 🤖 **Gemini 18M** - ₱299 / month\n   • 18M Token Context Window Access\n   • Advanced AI Reasoning & Coding Assistant\n   • 24/7 API & Web Access\n\n💡 *Pumili ng produkto sa ibaba para sa detalye o pagbili:*`;
   
   const keyboard = new InlineKeyboard()
-    .text("📱 Smartphone", "prod_phone")
-    .text("💻 Laptop", "prod_laptop")
+    .text("🎬 Netflix Premium", "prod_netflix")
     .row()
-    .text("🎧 Earbuds", "prod_earbuds")
-    .text("⌚ Smart Watch", "prod_watch");
+    .text("🤖 Gemini 18M", "prod_gemini");
 
   await ctx.reply(text, { parse_mode: "Markdown", reply_markup: keyboard });
 }
 
 async function sendMyOrders(ctx) {
-  const text = `📦 **Aking mga Order (My Orders):**\n\n🆔 **Order #ORD-10928**\n• **Item:** Wireless Earbuds (x1)\n• **Status:** 🚚 **In Transit**\n• **Total:** ₱1,999.00\n• **Est. Delivery:** Aug 14, 2026\n\n🆔 **Order #ORD-08721**\n• **Item:** Smart Watch Series 5 (x1)\n• **Status:** ✅ **Delivered**\n• **Total:** ₱3,499.00\n\n💡 *Para sa mga katanungan sa iyong order, gamitin ang /support command.*`;
+  const text = `📦 **Aking mga Order (My Orders):**\n\n🆔 **Order #ORD-10928**\n• **Item:** Netflix Premium (1 Month)\n• **Status:** ✅ **Active / Delivered**\n• **Total:** ₱149.00\n• **Expiry:** Sep 12, 2026\n\n🆔 **Order #ORD-08721**\n• **Item:** Gemini 18M Access (1 Month)\n• **Status:** ✅ **Active**\n• **Total:** ₱299.00\n\n💡 *Para sa mga katanungan sa iyong order, gamitin ang /support command.*`;
   await ctx.reply(text, { parse_mode: "Markdown" });
 }
 
@@ -102,7 +100,7 @@ async function sendSupport(ctx) {
 }
 
 async function sendAbout(ctx) {
-  const text = `ℹ️ **Tungkol sa Aming Shop (About Us):**\n\n🏪 **E-Commerce Telegram Bot Store**\nKami ay nagbibigay ng pinakamabilis at pinaka-maaasahang online shopping experience sa Telegram!\n\n✨ **Bakit kami ang piliin?**\n• 💯 Genuine & Original Products\n• 🚀 Fast & Secure Shipping Nationwide\n• 💳 Flexible Payment Options (GCash, PayMaya, COD)\n• 🛡️ 7-Day Money Back Guarantee\n\n🌐 **Website:** https://example.com`;
+  const text = `ℹ️ **Tungkol sa Aming Shop (About Us):**\n\n🏪 **E-Commerce Telegram Bot Store**\nKami ay nagbibigay ng pinakamabilis at pinaka-maaasahang online shopping experience sa Telegram!\n\n✨ **Bakit kami ang piliin?**\n• 💯 Genuine & Original Accounts\n• 🚀 Instant Delivery via Telegram\n• 💳 Flexible Payment Options (GCash, PayMaya, Maya)\n• 🛡️ Full Warranty sa buong Subscription\n\n🌐 **Website:** https://example.com`;
   await ctx.reply(text, { parse_mode: "Markdown" });
 }
 
@@ -163,24 +161,20 @@ bot.callbackQuery("about_bot", async (ctx) => {
   await sendAbout(ctx);
 });
 
-bot.callbackQuery("prod_phone", async (ctx) => {
+bot.callbackQuery("prod_netflix", async (ctx) => {
   await ctx.answerCallbackQuery();
-  await ctx.reply("📱 **Smartphone Pro Max**\nPresyo: ₱24,999\nSpecs: 128GB Storage, 8GB RAM, 5G Ready, Triple Camera 50MP", { parse_mode: "Markdown" });
+  await ctx.reply(
+    "🎬 **Netflix Premium Account**\n\n💰 **Presyo:** ₱149 / buwan\n\n✨ **Features:**\n• 4K Ultra HD Streaming\n• Solo Profile na may sariling PIN\n• Pwede sa TV, Phone, Laptop, & Tablet\n• Full Warranty sa buong subscription period\n\n💬 Mag-reply o i-chat si @SupportAdmin para bumili!",
+    { parse_mode: "Markdown" }
+  );
 });
 
-bot.callbackQuery("prod_laptop", async (ctx) => {
+bot.callbackQuery("prod_gemini", async (ctx) => {
   await ctx.answerCallbackQuery();
-  await ctx.reply("💻 **Laptop Ultra Slim**\nPresyo: ₱45,000\nSpecs: Core i7 13th Gen, 16GB DDR5 RAM, 512GB NVMe SSD, 14\" FHD Display", { parse_mode: "Markdown" });
-});
-
-bot.callbackQuery("prod_earbuds", async (ctx) => {
-  await ctx.answerCallbackQuery();
-  await ctx.reply("🎧 **Wireless Earbuds**\nPresyo: ₱1,999\nSpecs: Active Noise Cancellation, Bluetooth 5.3, 24hr Playtime with Charging Case", { parse_mode: "Markdown" });
-});
-
-bot.callbackQuery("prod_watch", async (ctx) => {
-  await ctx.answerCallbackQuery();
-  await ctx.reply("⌚ **Smart Watch Series 5**\nPresyo: ₱3,499\nSpecs: Heart Rate & SpO2 Monitoring, IP68 Water Resistant, AMOLED Display", { parse_mode: "Markdown" });
+  await ctx.reply(
+    "🤖 **Gemini 18M (AI Access)**\n\n💰 **Presyo:** ₱299 / buwan\n\n✨ **Features:**\n• Massive 18M Token Context Window\n• Advanced Code Generation & AI Reasoning\n• High-speed response rate\n• Full 24/7 Access & Support\n\n💬 Mag-reply o i-chat si @SupportAdmin para bumili!",
+    { parse_mode: "Markdown" }
+  );
 });
 
 // ==========================================
